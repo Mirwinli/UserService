@@ -15,7 +15,7 @@ import (
 )
 
 type UserService interface {
-	NewUser(ctx context.Context, id int64, username string) error
+	NewUser(ctx context.Context, username string) error
 	GetUser(ctx context.Context, username string) (service.User, error)
 	UpdateUser(ctx context.Context, username string, firstname string, lastname string, birthDay time.Time, phone string) error
 }
@@ -49,7 +49,7 @@ func (s *serverApi) GetProfileByUsername(ctx context.Context, req *userv1.UserRe
 func (s *serverApi) CreateProfile(ctx context.Context, req *userv1.CreateRequest) (*userv1.CreateResponse, error) {
 	const op = "server.CreateProfile"
 
-	if err := s.userService.NewUser(ctx, req.GetUserId(), req.Username); err != nil {
+	if err := s.userService.NewUser(ctx, req.Username); err != nil {
 		if errors.Is(err, storage.ErrUserAlreadyExists) {
 			return nil, status.Error(codes.AlreadyExists, "User already exists")
 		}

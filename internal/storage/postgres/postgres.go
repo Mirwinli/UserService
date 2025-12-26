@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"time"
+	jwtt "user_service/internal/lib/jwt"
 	"user_service/internal/service"
 	"user_service/internal/storage"
 
@@ -50,11 +51,13 @@ func (p *Postgres) Get(ctx context.Context, username string) (service.User, erro
 	}, nil
 }
 
-func (p *Postgres) New(ctx context.Context, username string, id int64) error {
+func (p *Postgres) New(ctx context.Context, username string) error {
 	const op = "postgres.New"
 	sql := "INSERT INTO profiles (user_id,username) VALUES ($1,$2)"
 
-	if _, err := p.db.Exec(ctx, sql, id, username); err != nil {
+	uid := jwtt.GetUserId(ctx)
+
+	if _, err := p.db.Exec(ctx, sql, uid, username); err != nil {
 		var pgErr *pgconn.PgError
 		if errors.As(err, &pgErr) && pgErr.Code == "23505" {
 			return fmt.Errorf("%s:%w", op, storage.ErrUserAlreadyExists)
@@ -64,7 +67,7 @@ func (p *Postgres) New(ctx context.Context, username string, id int64) error {
 	return nil
 }
 
-func (p *Postgres) Update(ctx context.Context, username string, firstname string, lastname string, birthDay time.Time, phone string) error {
+func (p *Postgres) Update(ctx context.Context, firstname string, lastname string, birthDay time.Time, phone string, uid int64) error {
 	const op = "postgres.Update"
 
 	sql := `
@@ -74,9 +77,9 @@ func (p *Postgres) Update(ctx context.Context, username string, firstname string
 			last_name = CASE WHEN $2 <> '' THEN $2 ELSE last_name END,
 			phone_number = CASE WHEN $3 <> '' THEN $3 ELSE phone_number END,
 			birth_day = CASE WHEN $4 > '0001-01-01'::date THEN $4 ELSE birth_day END
-		WHERE username = $5`
+		WHERE user_id = $5`
 
-	res, err := p.db.Exec(ctx, sql, firstname, lastname, phone, birthDay, username)
+	res, err := p.db.Exec(ctx, sql, firstname, lastname, phone, birthDay, uid)
 	if err != nil {
 		return fmt.Errorf("%s:%w ", op, err)
 	}

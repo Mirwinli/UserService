@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log/slog"
 	"time"
+	jwtt "user_service/internal/lib/jwt"
 	"user_service/internal/storage"
 )
 
@@ -20,8 +21,8 @@ type User struct {
 
 type Storage interface {
 	Get(ctx context.Context, username string) (User, error)
-	New(ctx context.Context, username string, id int64) error
-	Update(ctx context.Context, username string, firstname string, lastname string, birthday time.Time, phone string) error
+	New(ctx context.Context, username string) error
+	Update(ctx context.Context, firstname string, lastname string, birthday time.Time, phone string, uid int64) error
 }
 
 type UserService struct {
@@ -36,12 +37,12 @@ func New(storage Storage, log *slog.Logger) *UserService {
 	}
 }
 
-func (u *UserService) NewUser(ctx context.Context, id int64, username string) error {
+func (u *UserService) NewUser(ctx context.Context, username string) error {
 	const op = "User.NewUser"
 	log := u.log.With(slog.String("op", op))
 
 	log.Info("creating new user")
-	if err := u.storage.New(ctx, username, id); err != nil {
+	if err := u.storage.New(ctx, username); err != nil {
 		if errors.Is(err, storage.ErrUserAlreadyExists) {
 			log.Error("user already exists")
 			return fmt.Errorf("%s:%w", op, storage.ErrUserAlreadyExists)
@@ -74,9 +75,10 @@ func (u *UserService) GetUser(ctx context.Context, username string) (User, error
 func (u *UserService) UpdateUser(ctx context.Context, username string, firstname string, lastname string, birthday time.Time, phone string) error {
 	const op = "User.UpdateUser"
 	log := u.log.With(slog.String("op", op))
+	uid := jwtt.GetUserId(ctx)
 
 	log.Info("updating user")
-	if err := u.storage.Update(ctx, username, firstname, lastname, birthday, phone); err != nil {
+	if err := u.storage.Update(ctx, firstname, lastname, birthday, phone, uid); err != nil {
 		if errors.Is(err, storage.ErrUserNotFound) {
 			log.Error("user not found")
 			return fmt.Errorf("%s:%w", op, storage.ErrUserNotFound)

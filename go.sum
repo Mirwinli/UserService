@@ -5,6 +5,8 @@ github.com/Mirwinli/proto_userService v0.0.0-20251226121153-78255743d948 h1:b/vK
 github.com/Mirwinli/proto_userService v0.0.0-20251226121153-78255743d948/go.mod h1:Tpx2byth7oq0P3sH1o+tpAbtxgqgJgdc6lFVeDLH57k=
 github.com/Mirwinli/proto_userService v0.0.0-20251226135337-f48fe8d9dd2e h1:RowELE0Qi6cUTe7S134/YPgOaqfVCM+cynk0G5kJ4/4=
 github.com/Mirwinli/proto_userService v0.0.0-20251226135337-f48fe8d9dd2e/go.mod h1:Tpx2byth7oq0P3sH1o+tpAbtxgqgJgdc6lFVeDLH57k=
+github.com/Mirwinli/proto_userService v0.0.0-20251226202409-ff1b870335a1 h1:UZjFInLp2i8sLYA3hvS+Nv4Sbn1JRZ+D+jVHyGYLac8=
+github.com/Mirwinli/proto_userService v0.0.0-20251226202409-ff1b870335a1/go.mod h1:Tpx2byth7oq0P3sH1o+tpAbtxgqgJgdc6lFVeDLH57k=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
@@ -13,6 +15,8 @@ github.com/go-logr/logr v1.4.3 h1:CjnDlHq8ikf6E492q6eKboGOC0T8CDaOvkHCIg8idEI=
 github.com/go-logr/logr v1.4.3/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=
 github.com/go-logr/stdr v1.2.2 h1:hSWxHoqTgW2S2qGc0LTAI563KZ5YKYRhT3MFKZMbjag=
 github.com/go-logr/stdr v1.2.2/go.mod h1:mMo/vtBO5dYbehREoey6XUKy/eSumjCCveDpRre4VKE=
+github.com/golang-jwt/jwt/v5 v5.3.0 h1:pv4AsKCKKZuqlgs5sUmn4x8UlGa0kEVt/puTpKx9vvo=
+github.com/golang-jwt/jwt/v5 v5.3.0/go.mod h1:fxCRLWMO43lRc8nhHWY6LGqRcf+1gQWArsqaEUEa5bE=
 github.com/golang/protobuf v1.5.4 h1:i7eJL8qZTpSEXOPTxNKhASYpMn+8e5Q6AdndVa1dWek=
 github.com/golang/protobuf v1.5.4/go.mod h1:lnTiLA8Wa4RWRcIUkrtSVa5nRhsEGBg48fD6rSs7xps=
 github.com/google/go-cmp v0.7.0 h1:wk8382ETsv4JYUZwIsn6YpYiWiBsYLSJiTsyBybVuN8=

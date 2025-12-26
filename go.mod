@@ -3,7 +3,7 @@ module user_service
 go 1.25.5
 
 require (
-	github.com/Mirwinli/proto_userService v0.0.0-20251226135337-f48fe8d9dd2e
+	github.com/Mirwinli/proto_userService v0.0.0-20251226202409-ff1b870335a1
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	github.com/jackc/pgx/v5 v5.7.6
 	google.golang.org/grpc v1.78.0
@@ -12,6 +12,7 @@ require (
 
 require (
 	github.com/BurntSushi/toml v1.6.0 // indirect
+	github.com/golang-jwt/jwt/v5 v5.3.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
