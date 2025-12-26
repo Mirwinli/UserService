@@ -1,17 +1,17 @@
 package storage
 
 import (
-	"database/sql"
 	"errors"
+	"time"
 )
 
 type GetDTO struct {
 	Id        int64
 	Username  string
-	FirstName sql.NullString // Може бути NULL
-	LastName  sql.NullString // Може бути NULL
-	BirthDay  sql.NullTime
-	Phone     sql.NullString
+	FirstName string
+	LastName  string
+	BirthDay  time.Time
+	Phone     string
 }
 
 var (
