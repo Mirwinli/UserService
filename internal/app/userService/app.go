@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log/slog"
 	"net"
+	"os"
+	jwtt "user_service/internal/lib/jwt"
 	"user_service/internal/server"
 
 	"google.golang.org/grpc"
@@ -17,7 +19,9 @@ type App struct {
 }
 
 func New(log *slog.Logger, port int, userService server.UserService) *App {
-	gRPCServer := grpc.NewServer()
+	gRPCServer := grpc.NewServer(
+		grpc.UnaryInterceptor(jwtt.AuthInterceptor(os.Getenv("APP_SECRET"))),
+	)
 
 	server.Register(gRPCServer, userService)
 

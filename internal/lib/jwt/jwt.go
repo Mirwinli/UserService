@@ -16,8 +16,8 @@ import (
 type ctxKey string
 
 const (
-	emptyValue = 0
-	userIDKey  = "userID"
+	emptyValue        = 0
+	userIDKey  ctxKey = "userID"
 )
 
 func AuthInterceptor(appSecret string) grpc.UnaryServerInterceptor {
