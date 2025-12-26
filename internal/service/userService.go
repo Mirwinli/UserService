@@ -41,7 +41,7 @@ func (u *UserService) NewUser(ctx context.Context, id int64, username string) er
 	log := u.log.With(slog.String("op", op))
 
 	log.Info("creating new user")
-	if err := u.NewUser(ctx, id, username); err != nil {
+	if err := u.storage.New(ctx, username, id); err != nil {
 		if errors.Is(err, storage.ErrUserAlreadyExists) {
 			log.Error("user already exists")
 			return fmt.Errorf("%s:%w", op, storage.ErrUserAlreadyExists)
